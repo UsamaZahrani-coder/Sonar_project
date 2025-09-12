@@ -1,0 +1,14 @@
+/* Custom selection highlight color */
+::selection {
+  background-color: #ff6700; /* Orange color from the sonar icon */
+  color: #fff;
+}
+
+/* Main navigation highlight color */
+.nav-tree .selected {
+  background-color: #ff6700 !important; /* Orange color from the sonar icon */
+}
+
+.nav-tree .item a:hover {
+  background-color: #ff6700 !important; /* Orange color from the sonar icon */
+}

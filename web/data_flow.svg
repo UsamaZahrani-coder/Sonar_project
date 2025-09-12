@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200">
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+        </marker>
+    </defs>
+
+    <style>
+        .box {
+            fill: #f9f9f9;
+            stroke: #333;
+            stroke-width: 1;
+        }
+        .text {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            text-anchor: middle;
+        }
+        .line {
+            stroke: #333;
+            stroke-width: 1;
+            marker-end: url(#arrow);
+        }
+    </style>
+
+    <!-- Boxes -->
+    <rect x="10" y="75" width="100" height="50" class="box" rx="5" />
+    <text x="60" y="100" class="text">File Input</text>
+
+    <rect x="150" y="75" width="120" height="50" class="box" rx="5" />
+    <text x="210" y="100" class="text">mojibake_open()</text>
+
+    <rect x="310" y="75" width="120" height="50" class="box" rx="5" />
+    <text x="370" y="100" class="text">Data Partitioning</text>
+
+    <rect x="470" y="75" width="120" height="50" class="box" rx="5" />
+    <text x="530" y="100" class="text">Sonar Module</text>
+
+    <rect x="630" y="75" width="150" height="50" class="box" rx="5" />
+    <text x="705" y="100" class="text">audio_engine.dll</text>
+
+    <!-- Lines -->
+    <line x1="110" y1="100" x2="150" y2="100" class="line" />
+    <line x1="270" y1="100" x2="310" y2="100" class="line" />
+    <line x1="430" y1="100" x2="470" y2="100" class="line" />
+    <line x1="590" y1="100" x2="630" y2="100" class="line" />
+
+</svg>

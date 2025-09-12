@@ -1,0 +1,4 @@
+Hello World! by Usama
+This is a sample text file for testing SONAR.
+It contains multiple lines and different characters: 123, @#$%
+End of file.

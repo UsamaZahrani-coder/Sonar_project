@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONAR - Project Overview</title>
+    <link rel="stylesheet" href="project_overview.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="../docs/Documentation/sonar_icon.svg" alt="SONAR Icon" class="icon">
+        <h1>SONAR - Project Overview</h1>
+        </header>
+
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>SONAR is a data analysis and visualization tool designed to inspect and transform binary files. It reads a file, divides it into partitions, and then applies various transformations to the data. The core feature is its ability to represent data as audio ("sonar"), allowing for a unique, auditory analysis of the file's contents. The project is written in C and uses the Doxygen documentation generator to create its documentation.</p>
+        </section>
+
+        <section id="data-flow">
+            <h2>Data Flow Diagram</h2>
+            <p>The following diagram illustrates the general data flow of the application:</p>
+            <img src="data_flow.svg" alt="Data Flow Diagram" style="width:100%;">
+        </section>
+
+        <section id="project-structure">
+            <h2>Project Structure</h2>
+            <p>The project is organized into several key directories:</p>
+            <ul>
+                <li><code>mojibake/</code>: Contains the core application logic.</li>
+                <li><code>mojibake/modules/</code>: Contains different modules for data transformation.</li>
+                <li><code>lib/</code>: Contains external libraries, such as the audio engine.</li>
+                <li><code>html/</code>, <code>latex/</code>, <code>rtf/</code>, <code>xml/</code>: These directories contain the output of the Doxygen documentation generation process.</li>
+            </ul>
+        </section>
+
+        <section id="core-components">
+            <h2>Core Components</h2>
+            <div class="component">
+                <h3>File Handling and Partitioning</h3>
+                <p>The main executable, built from <code>main.c</code>, is responsible for parsing command-line arguments and initiating the file analysis process. The core logic for reading and partitioning files is located in <code>mojibake.c</code> and <code>target.c</code>. The <code>mojibake_open()</code> function reads the target file into memory, and then divides it into a series of partitions for processing.</p>
+            </div>
+            <div class="component">
+                <h3>Linked Lists</h3>
+                <p>The project makes use of linked lists in its `sonar` and `dsonar` modules to manage sequences of data. These are not general-purpose linked list implementations, but rather specialized structures for handling audio samples and reconstructed data.</p>
+                <p>The following diagram illustrates the basic structure of the linked lists used in the project:</p>
+                <img src="linked_list.svg" alt="Linked List Diagram" style="width:100%;">
+                <h4><code>audio_sample_node_t</code> (in <code>mbx_sonar.h</code>)</h4>
+                <p>This linked list is used to store a sequence of audio samples generated from the input file. Each node in the list represents a single audio "note" with a specific frequency, amplitude, and duration.</p>
+                <h4><code>reverse_sample_node_t</code> (in <code>mbx_dsonar.h</code>)</h4>
+                <p>This linked list is used in the reverse process, where an audio signal is analyzed to reconstruct the original data. Each node stores a detected frequency from the audio input.</p>
+                <p>From a security perspective, the use of linked lists requires careful memory management to avoid vulnerabilities such as buffer overflows, use-after-free, and memory leaks. The code responsible for allocating, manipulating, and freeing these lists should be carefully reviewed.</p>
+            </div>
+            <div class="component">
+                <h3>Sonar Module: Data to Audio</h3>
+                <p>The `sonar` module is responsible for converting the raw binary data of a file into an audible representation. This process allows for a unique, auditory analysis of the file's contents. The transformation is performed by the `mbx_sonar.c` file.</p>
+                <p>The process works as follows:</p>
+                <ol>
+                    <li>The input file is read and divided into partitions.</li>
+                    <li>For each byte in a partition, the `create_audio_sample` function is called.</li>
+                    <li>This function maps the byte's value (0-255) to a specific audio frequency. The mapping is based on a configurable frequency range.</li>
+                    <li>The function also assigns a fixed amplitude and duration to the audio sample.</li>
+                    <li>Each generated audio sample is then added as a new node to the `audio_sample_node_t` linked list.</li>
+                    <li>Finally, the entire linked list of audio samples is passed to the `audio_engine.dll`, which plays the sound.</li>
+                </ol>
+            </div>
+            <div class="component">
+                <h3>Dsonar Module: Audio to Data</h3>
+                <p>The `dsonar` module performs the reverse operation of the `sonar` module. It takes an audio signal as input and attempts to reconstruct the original binary data. This functionality is implemented in `mbx_dsonar.c`.</p>
+                <p>The process is as follows:</p>
+                <ol>
+                    <li>The `dsonar` module uses an audio analysis library (not shown in the provided code) to detect the dominant frequencies in the input audio signal.</li>
+                    <li>Each detected frequency is stored in a `reverse_sample_node_t` linked list.</li>
+                    <li>The module then iterates through the linked list of detected frequencies.</li>
+                    <li>For each frequency, it performs a reverse mapping to determine the original byte value that would have generated that frequency.</li>
+                    <li>The reconstructed bytes are then written to an output buffer, effectively recreating the original data.</li>
+                </ol>
+            </div>
+            <div class="component">
+                <h3>Dynamic Libraries</h3>
+                <p>The project uses a dynamic-link library (DLL) for its audio engine, located at <code>lib/audio_engine.dll</code>. This library is responsible for taking the generated audio samples and playing them through the system's audio device.</p>
+                <p>The corresponding header file, <code>lib/audio_engine.h</code>, defines the interface to this library. The use of a DLL allows the audio engine to be updated or replaced independently of the main application. It's important to ensure that the application correctly handles the loading of this DLL and that the DLL itself is from a trusted source and free of vulnerabilities.</p>
+            </div>
+        </section>
+
+        <section id="documentation">
+            <h2>Documentation</h2>
+            <p>The project uses Doxygen to generate documentation from the source code comments. The main page of the documentation is defined in <code>MAINPAGE.md</code>. The Doxygen configuration is stored in the <code>Doxyfile</code>. The generated documentation can be found in the <code>html/</code> directory.</p>
+        </section>
+
+    </div>
+</body>
+</html>
