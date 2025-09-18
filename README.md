@@ -1,152 +1,174 @@
-# SONAR
+# SONAR - Interactive Data Sonification & Analysis Toolkit
 
 ![SONAR](docs/Documentation/sonar_icon.svg)
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey.svg)]()
+[![Language](https://img.shields.io/badge/language-C%20%7C%20Python-green.svg)]()
+
 A powerful data analysis and visualization toolkit that transforms binary files into audio representations for unique auditory analysis. SONAR reads files, partitions them, and applies various transformations including audio sonification, enabling innovative approaches to data inspection and pattern recognition.
 
-## 🎵 Features
+## Key Features
 
-- **Audio Sonification (SONAR)**: Convert binary data to audio frequencies for auditory analysis
-- **Data Reconstruction (dSONAR)**: Reverse-engineer audio back to original binary data
-- **Multiple Analysis Modules**: Hexadecimal display, character counting, text viewing
-- **Dynamic Audio Engine**: Extensible audio processing with DLL support
-- **Visualization Tools**: 3D audio visualization and spectral analysis
-- **Cross-Platform**: Windows and Linux support
-- **High Performance**: Optimized C implementation with modular architecture
+### Audio Sonification (SONAR)
+- Convert binary data to audio frequencies for auditory analysis
+- Map bytes to specific frequencies (220Hz - 2220Hz range)
+- Generate WAV files for each data partition
+- Real-time audio playback with interactive controls
 
-## 🚀 Quick Start
+### Data Reconstruction (dSONAR)
+- Reverse-engineer audio back to original binary data
+- Analyze WAV files to extract frequency data
+- Reconstruct original byte sequences with validation
+- Support for CSV and binary output formats
+
+
+![SONAR](docs/Documentation/sonar_icon.svg)
+
+### Interactive Visualization
+- **Interactive Byte Viewer**: Modern UI with grid, sequential, and spectrogram views
+- **Zoom Functionality**: Detailed spectrum analysis with 0.5x to 8x zoom levels
+- **Real-time Navigation**: Arrow key navigation and mouse interaction
+- **3D Audio Visualization**: Advanced plotly-based 3D representations
+- **Spectral Analysis**: Waterfall displays and frequency domain analysis
+
+### Analysis Modules
+- Hexadecimal display with ASCII representation
+- Character frequency analysis and statistics
+- Text extraction and viewing capabilities
+- Dynamic audio engine with DLL support
+
+## Quick Start
 
 ### Prerequisites
 
-- GCC compiler
+**System Requirements:**
+- GCC compiler or Visual Studio Build Tools
 - Make build system
-- Python 3.x (for visualization tools)
-- Windows: MinGW or Visual Studio Build Tools
-- Linux: Standard development tools
+- Python 3.7+ (for visualization tools)
 
-### Building
+**Python Dependencies:**
+```bash
+pip install pygame numpy matplotlib plotly scipy librosa tkinter
+```
+
+### Installation
 
 ```bash
-# Clone and navigate to project
-cd mojibake
+# Clone the repository
+git clone https://github.com/yourusername/SONAR_Project.git
+cd SONAR_Project
 
 # Build the project
 make
 
 # Build debug version (optional)
 make debug
-
-# Build shared library (optional)
-make shared
 ```
 
 ### Basic Usage
 
+#### Command Line Interface
 ```bash
 # Convert file to audio (SONAR mode)
 ./build/bin/mojibake_sonar input.txt sonar
+
+# Reverse audio to data (dSONAR mode)
+./build/bin/mojibake_sonar audio.wav dsonar
 
 # Hexadecimal analysis
 ./build/bin/mojibake_sonar input.bin hex
 
 # Character count analysis
 ./build/bin/mojibake_sonar document.txt charcount
-
-# Text view analysis
-./build/bin/mojibake_sonar data.txt textview
-
-# Reverse audio to data (dSONAR mode)
-./build/bin/mojibake_sonar audio.wav dsonar
 ```
 
-## 📁 Project Structure
-
-```
-mojibake/
-├── src/                    # Source code
-│   ├── core/              # Core application logic
-│   ├── main/              # Main executable
-│   └── modules/default/   # Analysis modules
-├── lib/                   # Audio engine library
-│   ├── audio_engine.dll  # Dynamic audio library
-│   ├── audio_engine.c    # Audio engine source
-│   └── audio_engine.h    # Audio engine header
-├── include/               # Public headers
-├── build/                 # Build output
-│   ├── bin/              # Executables
-│   └── obj/              # Object files
-├── samples/               # Example files
-│   ├── audio/            # Audio samples
-│   ├── data/             # Data samples
-│   └── images/           # Generated visualizations
-├── tools/                 # Python visualization tools
-├── docs/                  # Generated documentation
-├── web/                   # Web documentation
-└── exports/               # Visualization exports
-```
-
-## 🔧 Analysis Modules
-
-### SONAR Module
-Converts binary data to audio frequencies:
-- Maps bytes to specific frequencies (220Hz - 2220Hz range)
-- Generates WAV files for each data partition
-- Provides frequency analysis and statistics
-- Supports dynamic audio library loading
-
-### dSONAR Module
-Reverse-engineers audio back to binary data:
-- Analyzes WAV files to extract frequency data
-- Reconstructs original byte sequences
-- Supports CSV and binary output formats
-- Validates reconstruction accuracy
-
-### Other Modules
-- **Hexadecimal Display**: Traditional hex dump with ASCII representation
-- **Character Count**: Statistical analysis of character frequencies
-- **Text View**: Human-readable text extraction and display
-
-## 🎨 Visualization Tools
-
-Python-based visualization suite in the `tools/` directory:
-
+#### Interactive Byte Viewer
 ```bash
-# 3D audio visualization
-python tools/sound_ball.py
-
-# Enhanced visualization with additional features
-python tools/enhanced_sound_ball.py
-
-# Advanced audio analysis
-python tools/advanced_audio_viz.py
+# Launch interactive visualization tool
+python tools/interactive_byte_viewer.py
 ```
 
-### Dependencies
-```bash
-pip install numpy matplotlib plotly scipy librosa
+**Controls:**
+- **Arrow Keys**: Navigate through data
+- **Mouse Click**: Select bytes and play sounds
+- **Spacebar**: Play current byte sound
+- **S**: Toggle between grid/sequential/spectrogram views
+- **+/-**: Zoom in/out (spectrum view)
+- **0**: Reset zoom
+- **L**: Load audio files
+- **ESC**: Exit
+
+## Project Structure
+
+```
+SONAR_Project/
+├── src/                     # Core C implementation
+│   ├── core/                   # Core application logic
+│   ├── main/                   # Main executable
+│   └── modules/default/        # Analysis modules
+├── lib/                     # Audio engine library
+│   ├── audio_engine.dll       # Dynamic audio library
+│   ├── audio_engine.c         # Audio engine source
+│   └── audio_engine.h         # Audio engine headers
+├── tools/                   # Python visualization suite
+│   ├── interactive_byte_viewer.py  # Main interactive tool
+│   ├── advanced_audio_viz.py   # Advanced visualizations
+│   ├── enhanced_sound_ball.py  # 3D audio visualization
+│   └── sound_ball.py          # Basic 3D visualization
+├── samples/                 # Example files and data
+│   ├── audio/                 # Audio samples
+│   ├── data/                  # Test data files
+│   └── images/                # Generated visualizations
+├── build/                   # Build output
+│   ├── bin/                   # Executables
+│   └── obj/                   # Object files
+├── docs/                    # Generated documentation
+├── web/                     # Web documentation
+└── exports/                 # Visualization exports
 ```
 
-## 📖 Documentation
+## Interactive Byte Viewer Features
 
-- **API Documentation**: Generated with Doxygen in `docs/Documentation/`
-- **Project Overview**: `web/project_overview.html`
-- **Sample Usage**: `samples/README.md`
-- **Visualization Guide**: `tools/visualization_README.md`
+### View Modes
 
-## 🔊 Audio Engine
+#### Grid View
+- Traditional hex grid layout
+- Color-coded frequency mapping
+- Interactive cell selection
+- Real-time audio feedback
 
-The project includes a dynamic audio engine (`lib/audio_engine.dll`) that provides:
-- Real-time audio playback
-- WAV file generation
-- Audio analysis and reporting
-- Cross-platform audio support
+#### Sequential View
+- Linear byte progression
+- Enhanced arrow key navigation
+- Smooth scrolling and paging
+- Continuous data flow visualization
 
-### Audio Engine API
+#### Spectrogram View
+- Frequency domain analysis
+- **Zoom Functionality**: 0.5x to 8x magnification
+- Time and frequency axis labels
+- Interactive position highlighting
+- Smart zoom centering
+
+### Modern UI Features
+- **Responsive Design**: Adapts to different screen sizes
+- **Rounded Corners**: Modern visual aesthetics
+- **Hover Effects**: Interactive button feedback
+- **Tooltips**: Contextual help and information
+- **Status Bar**: Real-time information display
+- **Progress Indicators**: Visual feedback for operations
+- **Help Overlay**: Built-in keyboard shortcuts guide
+
+## Audio Engine API
+
+The dynamic audio engine provides comprehensive audio processing:
+
 ```c
 // Initialize audio system
 int init_audio(int sample_rate);
 
-// Play frequency with specified amplitude and duration
+// Play frequency with specified parameters
 int play_frequency(double frequency, double amplitude, double duration);
 
 // Generate WAV file from audio samples
@@ -156,7 +178,27 @@ int generate_wav(const char* filename, audio_sample_node_t* samples);
 void cleanup_audio(void);
 ```
 
-## 🛠️ Build Targets
+## Visualization Tools
+
+### 3D Audio Visualization
+```bash
+# Basic 3D visualization
+python tools/sound_ball.py
+
+# Enhanced visualization with additional features
+python tools/enhanced_sound_ball.py
+
+# Advanced audio analysis with multiple views
+python tools/advanced_audio_viz.py
+```
+
+### Export Formats
+- **HTML**: Interactive 3D plots
+- **PNG**: High-resolution static images
+- **CSV**: Raw data for further analysis
+- **WAV**: Audio file generation
+
+## Build System
 
 ```bash
 make                # Build main executable
@@ -166,83 +208,130 @@ make clean          # Clean build artifacts
 make docs           # Generate documentation (requires Doxygen)
 ```
 
-## 📊 Example Workflows
+## Example Workflows
 
-### 1. Binary File Analysis
+### 1. Interactive Data Exploration
 ```bash
-# Analyze a binary file with SONAR
-./build/bin/mojibake_sonar firmware.bin sonar
+# Launch interactive viewer
+python tools/interactive_byte_viewer.py
 
-# Generated files:
-# - sonar_partition_0.wav, sonar_partition_1.wav, ...
-# - Frequency analysis output
+# Load your data file using 'L' key
+# Switch between views using 'S' key
+# Use zoom controls (+/-/0) in spectrogram view
+# Navigate with arrow keys or mouse clicks
 ```
 
-### 2. Audio Data Recovery
+### 2. Binary File Analysis Pipeline
+```bash
+# Step 1: Convert binary to audio
+./build/bin/mojibake_sonar firmware.bin sonar
+
+# Step 2: Visualize in 3D
+python tools/enhanced_sound_ball.py
+
+# Step 3: Interactive analysis
+python tools/interactive_byte_viewer.py
+
+# Generated files:
+# - sonar_partition_*.wav (audio files)
+# - 3d_landscape.html (3D visualization)
+# - spectral_waterfall.png (frequency analysis)
+```
+
+### 3. Audio Data Recovery
 ```bash
 # Recover data from audio file
 ./build/bin/mojibake_sonar recovered_audio.wav dsonar
+
+# Verify reconstruction
+python tools/interactive_byte_viewer.py
 
 # Generated files:
 # - reconstructed_data.bin
 # - frequency_analysis.csv
 ```
 
-### 3. Visualization Pipeline
-```bash
-# Generate audio from data
-./build/bin/mojibake_sonar data.txt sonar
+## Advanced Features
 
-# Create 3D visualization
-python tools/enhanced_sound_ball.py
+### Zoom Functionality (Spectrogram View)
+- **Zoom Levels**: 0.5x to 8.0x magnification
+- **Smart Centering**: Automatically centers on current selection
+- **Bounds Checking**: Prevents zoom beyond data limits
+- **Visual Feedback**: Real-time zoom level display
+- **Keyboard Controls**: Intuitive +/- and 0 key bindings
 
-# View results in exports/ directory
-```
+### Navigation Enhancements
+- **Arrow Key Navigation**: Smooth movement in all views
+- **Page Navigation**: Quick data traversal
+- **Mouse Interaction**: Click-to-select functionality
+- **Position Highlighting**: Visual current position indicators
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
-**Dynamic library not found**:
-- Ensure `lib/audio_engine.dll` exists
-- Check file permissions
-- Verify path in configuration
+**Python Dependencies Missing:**
+```bash
+pip install -r samples/data/requirements_viz.txt
+```
 
-**Build errors**:
+**Audio Engine Not Found:**
+- Ensure `lib/audio_engine.dll` exists
+- Check file permissions and path configuration
+- Verify audio drivers are installed
+
+**Build Errors:**
 - Install required development tools
 - Check GCC version compatibility
 - Ensure all dependencies are available
 
-**Audio playback issues**:
-- Verify audio drivers are installed
-- Check system audio configuration
-- Test with built-in audio generation
+**Interactive Viewer Issues:**
+- Verify pygame installation: `pip install pygame`
+- Check Python version (3.7+ required)
+- Ensure tkinter is available for file dialogs
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Add tests if applicable
-5. Submit a pull request
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
-## 📄 License
+### Development Guidelines
+- Follow existing code style and conventions
+- Add documentation for new features
+- Include sample files for testing
+- Update README for significant changes
 
-This project is part of the SONAR Development Team's research into data sonification and analysis techniques.
+## License
 
-## 🔗 Related Projects
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- Audio analysis and visualization tools
-- Binary data inspection utilities
-- Data sonification research
+## Acknowledgments
 
-## 📞 Support
+- SONAR Development Team for innovative data sonification research
+- Contributors to the visualization and audio processing modules
+- Open source community for tools and libraries used
 
-For questions, issues, or contributions:
-- Check the documentation in `docs/Documentation/`
-- Review sample files in `samples/`
-- Examine the project overview at `web/project_overview.html`
+## Support & Documentation
+
+- **API Documentation**: `docs/Documentation/index.html`
+- **Project Overview**: `web/project_overview.html`
+- **Sample Usage**: `samples/README.md`
+- **Visualization Guide**: `tools/visualization_README.md`
+- **Byte Viewer Guide**: `tools/byte_viewer_README.md`
+
+## Related Projects
+
+- [Audio Analysis Tools](samples/audio/)
+- [Binary Data Inspection Utilities](tools/)
+- [Data Sonification Research](docs/)
 
 ---
 
-**SONAR** - Transforming data into sound, sound into insight.
+**SONAR** - *Transforming data into sound, sound into insight.*
+
+**Experience your data in a whole new dimension**
