@@ -55,7 +55,7 @@ pip install pygame numpy matplotlib plotly scipy librosa tkinter
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/SONAR_Project.git
+git clone https://github.com/UsamaZahrani-coder/SONAR_Project.git
 cd SONAR_Project
 
 # Build the project
