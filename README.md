@@ -1,6 +1,5 @@
 # SONAR - Interactive Data Sonification & Analysis Toolkit
 
-![SONAR](docs/Documentation/sonar_icon.svg)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey.svg)]()
