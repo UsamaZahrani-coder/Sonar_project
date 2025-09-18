@@ -1,7 +1,5 @@
 # SONAR - Interactive Data Sonification & Analysis Toolkit
 
-
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey.svg)]()
 [![Language](https://img.shields.io/badge/language-C%20%7C%20Python-green.svg)]()
 
@@ -304,10 +302,6 @@ pip install -r samples/data/requirements_viz.txt
 - Add documentation for new features
 - Include sample files for testing
 - Update README for significant changes
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
