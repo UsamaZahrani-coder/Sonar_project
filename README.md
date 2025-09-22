@@ -317,11 +317,6 @@ pip install -r samples/data/requirements_viz.txt
 - **Visualization Guide**: `tools/visualization_README.md`
 - **Byte Viewer Guide**: `tools/byte_viewer_README.md`
 
-## Related Projects
-
-- [Audio Analysis Tools](samples/audio/)
-- [Binary Data Inspection Utilities](tools/)
-- [Data Sonification Research](docs/)
 
 ---
 
